@@ -1,0 +1,9 @@
+-- Open two psql windows. Run line by line in the order of the numbers.
+-- A1: BEGIN;  UPDATE accounts SET balance = balance + 1 WHERE account_id = 1;
+-- B1: BEGIN;  UPDATE accounts SET balance = balance + 1 WHERE account_id = 2;
+-- A2: UPDATE accounts SET balance = balance + 1 WHERE account_id = 2;   -- waits
+-- B2: UPDATE accounts SET balance = balance + 1 WHERE account_id = 1;   -- boom
+-- Result in B:
+-- ERROR:  deadlock detected
+-- DETAIL: Process ... waits for ShareLock on transaction ...; blocked by process ...
+-- SQLSTATE 40P01
